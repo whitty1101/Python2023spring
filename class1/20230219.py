@@ -1,34 +1,34 @@
-# # from tkinter import *
-# # #引入PILLOW MODULE
-# # from PIL import Image, ImageTk
+from tkinter import *
+#引入PILLOW MODULE
+from PIL import Image, ImageTk
 
-# # root=Tk()
-# # root.title('20230219')
-# # root.geometry('1000x500+500+150')
-# # #開啟圖片
-# # img=Image.open('C:/Users/User/Documents/Python2023sping/class1/logo_tree.png')
-# # #轉換為tk圖片物件
-# # tk_img=ImageTk.PhotoImage(img)
-# # #設記程式ICON
-# # root.iconphoto(True,tk_img)
+root=Tk()
+root.title('20230219')
+root.geometry('1000x500+500+150')
+#開啟圖片
+img=Image.open('C:/Users/Harrison/Documents/Python2023spring/class1/logo_tree.png')
+#轉換為tk圖片物件
+tk_img=ImageTk.PhotoImage(img)
+#設記程式ICON
+root.iconphoto(True,tk_img)
 
-# # #創立LABEL
-# # label1=Label(root, text='flat',relief='flat')
-# # #建立視窗
-# # label1.pack()
-# # label2=Label(root, text='flat',relief='groove')
-# # label2.pack()
-# # label3=Label(root, text='flat',relief='raised')
-# # label3.pack()
-# # label4=Label(root, text='flat',relief='ridge')
-# # label4.pack()
-# # label5=Label(root, text='flat',relief='solid')
-# # label5.pack()
-# # label6=Label(root, text='flat',relief='sunken')
-# # label6.pack()
-# # label7=Label(root, text='processing',relief='ridge',anchor=W,bd=2)
-# # label7.pack(side='bottom',fill='x')
-# # root.mainloop()
+#創立LABEL
+label1=Label(root, text='flat',relief='flat')
+#建立視窗
+label1.pack()
+label2=Label(root, text='flat',relief='groove')
+label2.pack()
+label3=Label(root, text='flat',relief='raised')
+label3.pack()
+label4=Label(root, text='flat',relief='ridge')
+label4.pack()
+label5=Label(root, text='flat',relief='solid')
+label5.pack()
+label6=Label(root, text='flat',relief='sunken')
+label6.pack()
+label7=Label(root, text='processing',relief='ridge',anchor=W,bd=2)
+label7.pack(side='bottom',fill='x')
+root.mainloop()
 
 # # from tkinter import *
 # # #引入PILLOW MODULE
