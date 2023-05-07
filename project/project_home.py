@@ -15,7 +15,15 @@ from tkinter import Text
 
 
 
-
+def cardcode():
+    messagebox.showinfo('cleared','cart cleared!!')
+    numl1['text']='0'
+    numl2['text']='0'
+    numl3['text']='0'
+    numl4['text']='0'
+    numl5['text']='0'
+    numl6['text']='0'
+    totallabel['text']='0'
 def add(numlabel,pricelabel):
     numlabel['text']=int(numlabel['text'])+1
     price=int(pricelabel['text'].split('.')[1].replace(',','').strip())
@@ -30,10 +38,16 @@ def minus(numlabel,pricelabel):
     else:
         messagebox.showwarning('showwarning','The number of product can\'t be below 0')
 def sell():
-    ana=messagebox.askyesno('Are you sure to pay up?','are you sure to pay up')
+    ana=messagebox.askyesno('Pay','are you sure to pay up')
     if ana=='yes':
         payup=Toplevel()
         payup.geometry('850x850')
+        card=Label(payup, text='please enter your card code.')
+        card.grid(row=0,column=0)
+        cardenter=ttk.Entry(payup)
+        cardenter.grid(row=0,column=4)
+        cardenterbutton=Button(payup,text='enter',command=cardcode)
+        cardenterbutton.grid(row=1,column=4)
 def showdetail():
     detailWindow =Toplevel(home)
     detailWindow.geometry('850x250')
