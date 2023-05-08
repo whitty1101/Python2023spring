@@ -23,7 +23,7 @@ def cardcode():
     numl4['text']='0'
     numl5['text']='0'
     numl6['text']='0'
-    totallabel['text']='0'
+    totalval=='0'
 def add(numlabel,pricelabel):
     numlabel['text']=int(numlabel['text'])+1
     price=int(pricelabel['text'].split('.')[1].replace(',','').strip())
@@ -39,7 +39,8 @@ def minus(numlabel,pricelabel):
         messagebox.showwarning('showwarning','The number of product can\'t be below 0')
 def sell():
     ana=messagebox.askyesno('Pay','are you sure to pay up')
-    if ana=='yes':
+    print(ana)
+    if ana==True:
         payup=Toplevel()
         payup.geometry('850x850')
         card=Label(payup, text='please enter your card code.')
@@ -48,6 +49,7 @@ def sell():
         cardenter.grid(row=0,column=4)
         cardenterbutton=Button(payup,text='enter',command=cardcode)
         cardenterbutton.grid(row=1,column=4)
+        payup.mainloop()
 def showdetail():
     detailWindow =Toplevel(home)
     detailWindow.geometry('850x250')
