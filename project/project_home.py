@@ -132,7 +132,7 @@ def email(emailEntryBox):
     #建立EMAIL物件
     x=random.randint(1,10000)
     print(x)
-    numbercode=MIMEText(x)
+    numbercode=MIMEText(str(x))
     #use bytes
     #建立並設定物件
     content=MIMEMultipart()#建立物件
