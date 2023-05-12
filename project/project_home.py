@@ -10,6 +10,7 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 from tkinter import messagebox
 from tkinter import Text
+import random
 
 
 
@@ -23,7 +24,7 @@ def cardcode():
     numl4['text']='0'
     numl5['text']='0'
     numl6['text']='0'
-    totalval=='0'
+    totalval.set('共消費:0元') 
 def add(numlabel,pricelabel):
     numlabel['text']=int(numlabel['text'])+1
     price=int(pricelabel['text'].split('.')[1].replace(',','').strip())
@@ -146,6 +147,23 @@ def email(emailEntryBox):
         mailToken=f.read()
     with smtp:#利用with來釋放資源
         try:
+            def codeSend():
+                x=random.randint(1,6)
+                print(x)
+                # numbercode=MIMEText(x)
+                # codescode=MIMEMultipart()#建立物件
+                # codescode['subject']='Login!!!'#郵件TITLE
+                # codescode['from']='bagelcatboy@gmail.com'#寄件者
+                # codescode['to']=emailEntryBox.get()#收件者
+                # codescode.attach(numbercode)
+                # smtp.ehlo()
+                # smtp.starttls()
+                # smtp.login('bagelcatboy@gmail.com',mailToken)
+                # smtp.send_message(codescode)
+
+                print('sent')
+                smtp.quit()
+                
             smtp.ehlo()
             smtp.starttls()
             smtp.login('bagelcatboy@gmail.com',mailToken)
@@ -154,8 +172,17 @@ def email(emailEntryBox):
             smtp.quit()
             code=Toplevel(home)
             codetext=Label(code,text='Please type your code')
+            codetext.grid(row=0,column=0)
+            codetextbox=ttk.Entry(code)
+            codetextbox.grid(row=1,column=0)
+            enterbox=Button(code,text='enter')
+            enterbox.grid(row=2,column=4)
+            send=Button(code,text='enter',command=codeSend)
+            code.mainloop()
         except Exception as e:
             print('Error message:',e)
+            messagebox.showwarning('showwarning','Email does not exist')
+
 def foodWin():
     food=Toplevel(home)
     food.geometry('1920x1080')
