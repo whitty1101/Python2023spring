@@ -124,61 +124,38 @@ def logWin():
     log=Toplevel(home)
     enterEmail=Label(log,text='Please enter your Email:      ')
     emailEntryBox=ttk.Entry(log)
-    emailSent=Button(log, text='enter', command=lambda:email(emailEntryBox))
+    emailSent=Button(log, text='enter', command=lambda:email(emailEntryBox, ))
     enterEmail.grid(row=0,column=0)
     emailEntryBox.grid(row=0,column=1)
     emailSent.grid(row=2,column=2)
 def email(emailEntryBox):
     #建立EMAIL物件
+    x=random.randint(1,10000)
+    print(x)
+    numbercode=MIMEText(x)
     text=MIMEText('You had login in EShop')
     #use bytes
     #建立並設定物件
     content=MIMEMultipart()#建立物件
-    content['subject']='Login!!!'#郵件TITLE
+    content['subject']='Login and codes'#郵件TITLE
     content['from']='bagelcatboy@gmail.com'#寄件者
     content['to']=emailEntryBox.get()#收件者
     print(emailEntryBox.get())
     #郵件內容使用MIMEMULTIPART物件的ATTACHMETHOD進行設定
-    content.attach(text)#郵件內容
+    content.attach(text,numbercode)#郵件內容
     #建立SMTPLIB物件
     smtp=smtplib.SMTP(host='smtp.gmail.com',port='587')
     #利用WITH來釋放資源
+    smtp.ehlo()
+    smtp.starttls()
+    smtp.login('bagelcatboy@gmail.com',mailToken)
+    smtp.send_message(content)
     with open('project/password.txt','r') as f:
         mailToken=f.read()
     with smtp:#利用with來釋放資源
         try:
-            def codeSend():
-                x=random.randint(1,6)
-                print(x)
-                # numbercode=MIMEText(x)
-                # codescode=MIMEMultipart()#建立物件
-                # codescode['subject']='Login!!!'#郵件TITLE
-                # codescode['from']='bagelcatboy@gmail.com'#寄件者
-                # codescode['to']=emailEntryBox.get()#收件者
-                # codescode.attach(numbercode)
-                # smtp.ehlo()
-                # smtp.starttls()
-                # smtp.login('bagelcatboy@gmail.com',mailToken)
-                # smtp.send_message(codescode)
-
-                print('sent')
-                smtp.quit()
-                
-            smtp.ehlo()
-            smtp.starttls()
-            smtp.login('bagelcatboy@gmail.com',mailToken)
-            smtp.send_message(content)
             print('sent')
             smtp.quit()
-            code=Toplevel(home)
-            codetext=Label(code,text='Please type your code')
-            codetext.grid(row=0,column=0)
-            codetextbox=ttk.Entry(code)
-            codetextbox.grid(row=1,column=0)
-            enterbox=Button(code,text='enter')
-            enterbox.grid(row=2,column=4)
-            send=Button(code,text='enter',command=codeSend)
-            code.mainloop()
         except Exception as e:
             print('Error message:',e)
             messagebox.showwarning('showwarning','Email does not exist')
