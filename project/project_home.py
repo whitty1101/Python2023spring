@@ -175,7 +175,8 @@ def email(emailEntryBox):
         except Exception as e:
             print('Error message:',e)
             messagebox.showwarning('showwarning','Email does not exist')
-
+def closerank(event):
+    rank.destroy()
 def RankWin():
     rank=Toplevel(home)
     rank.geometry('1920x1080')
@@ -202,6 +203,7 @@ def RankWin():
     table1.insert('',index='end',text=pearst5['text'],values=[pearsPrice['text'],'No.6',3.0])
     table1.insert('',index='end',text=mangot6['text'],values=[mangoPrice['text'],'No.4',4.0])
     table1.grid(row=1,column=0,columnspan=10,sticky=W)
+    rank.bind('<Control- w>',closerank)
     rank.mainloop()
     
 
@@ -229,7 +231,8 @@ def showstockdetail():
     tk_img1=ImageTk.PhotoImage(ratestar)
     ratestar=Label(showstockdetailwin,image=tk_img1,width=300,height=240)
     ratestar.grid(row=6,column=0,sticky=W+E)
-
+def closetab(event):
+    home.destroy()
 
 
 
@@ -241,6 +244,7 @@ def showstockdetail():
 home=Tk()
 home.title('KubeTech Shop')
 home.geometry('1920x1080')
+
 # Create a ScrolledFrame widget
 sframe1 = ScrolledFrame(home,width=1920, height=1080,bg='#F0F0F0')
 sframe1.grid(row=0,column=0)
@@ -248,7 +252,7 @@ sframe1.bind_arrow_keys(home)
 sframe1.bind_scroll_wheel(home)
 inner_frame = sframe1.display_widget(Frame)
 
-
+home.bind('<Control- w>',closetab)
 
     
 
