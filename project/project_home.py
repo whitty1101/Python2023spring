@@ -130,7 +130,7 @@ def logWin():
     emailSent.grid(row=2,column=2)
 def email(emailEntryBox):
     #建立EMAIL物件
-    x=random.randint(1,10000)
+    x=random.randint(1,10000,)
     print(x)
     numbercode=MIMEText(str(x))
     #use bytes
@@ -145,16 +145,24 @@ def email(emailEntryBox):
     #建立SMTPLIB物件
     smtp=smtplib.SMTP(host='smtp.gmail.com',port='587')
     #利用WITH來釋放資源
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.login('bagelcatboy@gmail.com',mailToken)
-    smtp.send_message(content)
     with open('project/password.txt','r') as f:
         mailToken=f.read()
     with smtp:#利用with來釋放資源
         try:
             print('sent')
+            smtp.ehlo()
+            smtp.starttls()
+            smtp.login('bagelcatboy@gmail.com',mailToken)
+            smtp.send_message(content)
             smtp.quit()
+            code=Toplevel(home)
+            entercode=Label(code,text='enter code')
+            entercode.grid(row=0,column=0)
+            entercodetext=ttk.Entry(code)
+            entercodetext.grid(row=1,column=0)
+            codevar=int(entercodetext.get())
+            if codevar==x:
+                messagebox.showinfo('info','you are now signed up')
         except Exception as e:
             print('Error message:',e)
             messagebox.showwarning('showwarning','Email does not exist')
