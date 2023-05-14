@@ -128,9 +128,17 @@ def logWin():
     enterEmail.grid(row=0,column=0)
     emailEntryBox.grid(row=0,column=1)
     emailSent.grid(row=2,column=2)
+def commandentercodebutton(entercodetext,code):
+    
+    if entercodetext==code:
+        messagebox.showinfo('info','you are now signed up')
+    else:
+        messagebox.showwarning('showwarning','wrong code')
+
+
 def email(emailEntryBox):
     #建立EMAIL物件
-    x=random.randint(1,10000,)
+    x=random.randint(1,10000)
     print(x)
     numbercode=MIMEText(str(x))
     #use bytes
@@ -160,44 +168,68 @@ def email(emailEntryBox):
             entercode.grid(row=0,column=0)
             entercodetext=ttk.Entry(code)
             entercodetext.grid(row=1,column=0)
-            codevar=int(entercodetext.get())
-            if codevar==x:
-                messagebox.showinfo('info','you are now signed up')
+            entercodebutton=Button(code,text='enter',command=lambda:commandentercodebutton(int(entercodetext.get()),int(x)))
+            entercodebutton.grid(row=2,column=6)
+            
+
         except Exception as e:
             print('Error message:',e)
             messagebox.showwarning('showwarning','Email does not exist')
 
-def foodWin():
-    food=Toplevel(home)
-    food.geometry('1920x1080')
-    homebutton=Button(home,text='tools',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=homeWin)
-    homebutton.grid(row=0,column=1,sticky=W+E)
-    gamesbutton=Button(home,text='games',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=gameWin)
-    gamesbutton.grid(row=0,column=2,sticky=W+E)
-    toolsbutton=Button(home,text='tools',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=toolWin)
-    toolsbutton.grid(row=0,column=3,sticky=W+E)
-def gameWin():
-    game=Toplevel(home)
-    game.geometry('1920x1080')
-    homebutton=Button(home,text='tools',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=homeWin)
-    homebutton.grid(row=0,column=1,sticky=W+E)
-    foodbutton=Button(home,text='food',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=foodWin)
-    foodbutton.grid(row=0,column=2,sticky=W+E)
-    toolsbutton=Button(home,text='tools',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=toolWin)
-    toolsbutton.grid(row=0,column=3,sticky=W+E)
-def toolWin():
-    tool=Toplevel(home)
-    tool.geometry('1920x1080')
-    homebutton=Button(home,text='tools',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=homeWin)
-    homebutton.grid(row=0,column=1,sticky=W+E)
-    foodbutton=Button(home,text='food',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=foodWin)
-    foodbutton.grid(row=0,column=2,sticky=W+E)
-    gamesbutton=Button(home,text='games',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=gameWin)
-    gamesbutton.grid(row=0,column=3,sticky=W+E)
-def homeWin():
-    home=Tk()
-    home.title('KubeTech Shop')
-    home.geometry('1920x1080')
+def RankWin():
+    rank=Toplevel(home)
+    rank.geometry('1920x1080')
+    homeB=Image.open("project/Screenshot 2023-03-26 212121.png")
+    homeB=homeB.resize((80,80))
+    global tk_img2
+    tk_img2=ImageTk.PhotoImage(homeB)
+    homeLb=Button(rank,image=tk_img2,width=80,height=80,command=rank.destroy)
+    homeLb.grid(row=0,column=0,sticky=W+E)
+    table1=ttk.Treeview(rank,columns=['Unit Price','Rank', 'Ratings'])
+    table1.heading('#0',text='Product Name')
+    table1.heading('#1',text='Unit Price')
+    table1.heading('#2',text='Rank')
+    table1.heading('#3',text='Ratings')
+    table1.column('#0', width=250,anchor=CENTER)
+    table1.column('#1',anchor=CENTER)
+    table1.column('#2',anchor=CENTER)
+    table1.column('#3', anchor=CENTER)
+    table1.tag_configure('totalcolor',background='#E7E2E2')
+    table1.insert('',index='end',text=hamburgert1['text'],values=[hamburgerPrice['text'],'No.2',4.5])
+    table1.insert('',index='end',text=bannat2['text'],values=[bannaPrice['text'],'No.7',2.9])
+    table1.insert('',index='end',text=cheeryt3['text'],values=[cheeryPrice['text'],'No.5',3.2])
+    table1.insert('',index='end',text=rawSalmont4['text'],values=[rawSalmonPrice['text'],'No.3',4.3])
+    table1.insert('',index='end',text=pearst5['text'],values=[pearsPrice['text'],'No.6',3.0])
+    table1.insert('',index='end',text=mangot6['text'],values=[mangoPrice['text'],'No.4',4.0])
+    table1.grid(row=1,column=0,columnspan=10,sticky=W)
+    rank.mainloop()
+    
+
+def showstockdetail():
+    showstockdetailwin=Toplevel(home)
+    stockname=Label(showstockdetailwin,text='Beef Noodle',font=('Inter',30))
+    stockname.grid(row=0,column=0,sticky=W)
+    salestate=Label(showstockdetailwin,text='Discounts:  ',font=20)
+    salestate.grid(row=1,column=0)
+    sale=Image.open("C:/Users/Harrison/Documents/Python2023spring/project/depositphotos_55294071-stock-illustration-sale-30-off-stamp.jpg")
+    sale=sale.resize((80,80))
+    global tk_img0
+    tk_img0=ImageTk.PhotoImage(sale)
+    saleLb=Label(showstockdetailwin,image=tk_img0,width=80,height=80)
+    saleLb.grid(row=2,column=0,sticky=W+E)
+    rating=Label(showstockdetailwin,text='Rates:',font=20)
+    rating.grid(row=3,column=0)
+    showrate=Label(showstockdetailwin,text='unknown user\nThe beef was very soft and easy to eat, and it was rich in taste. I had better tasting beef in a beef noodle soup but this is definitely in the top 3. \nThe soup was also very good. There is also a free option of adding a yellow-orange colored "seasoning". At first I did not know what it was, \nbut after putting some on my soup and mixing it, there were red circles forming on top of my soup, meaning there was oil. Also, after adding it, the soup became spicier.\n unkown user\n The stock is indeed very rich, and flavors. When add the lard both spicy or not-so-spicy, it brings out the richness of the taste. \nI did not add other condiments readily on the table. The serving of the beef is reasonable and tender. The noodle though is not as chewy as YK.',font=('Inter',10 ))
+    showrate.grid(row=4,column=0,sticky=W)
+    avergerate=Label(showstockdetailwin,text='Average ratings',font=20)
+    avergerate.grid(row=5,column=0)
+    ratestar=Image.open("project/pngtree-four-star-rating-sign-png-image_6026608.png")
+    ratestar=ratestar.resize((300,240))
+    global tk_img1
+    tk_img1=ImageTk.PhotoImage(ratestar)
+    ratestar=Label(showstockdetailwin,image=tk_img1,width=300,height=240)
+    ratestar.grid(row=6,column=0,sticky=W+E)
+
 
 
 
@@ -228,12 +260,8 @@ ShoppingCart=ImageTk.PhotoImage(ShoppingCart)
 
 titlelabel=Label(inner_frame,image=ShoppingCart,width=80,height=40)
 titlelabel.grid(row=0,column=0,sticky=W)
-foodbutton=Button(inner_frame,text='food',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=foodWin)
-foodbutton.grid(row=0,column=1,sticky=W+E)
-gamesbutton=Button(inner_frame,text='games',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=gameWin)
-gamesbutton.grid(row=0,column=2,sticky=W+E)
-toolsbutton=Button(inner_frame,text='tools',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=toolWin)
-toolsbutton.grid(row=0,column=3,sticky=W+E)
+rank=Button(inner_frame,text='rank',font=('Inter',18),fg='#1E1E1E',bg='#ECE8E7',width=5,pady=2,command=RankWin)
+rank.grid(row=0,column=1,sticky=W+E)
 loginbutton=Button(inner_frame,text='會員登入/註冊',font=('Inter',18),fg='#1E1E1E',bg='#F8DCDC',width=10,pady=2,command=logWin)
 loginbutton.grid(row=0,column=10,sticky=E,padx=5)
 
@@ -243,7 +271,7 @@ loginbutton.grid(row=0,column=10,sticky=E,padx=5)
 banner=Image.open("project/taiwanese-beef-noodle-soup-4777014-hero-01-e06a464badec476684e513cad44612da.jpg")
 banner=banner.resize((750,500))
 banner=ImageTk.PhotoImage(banner)
-bannerLabel=Button(inner_frame,image=banner,width=750,height=500)
+bannerLabel=Button(inner_frame,image=banner,width=750,height=500,command=showstockdetail)
 bannerLabel.grid(row=1,column=0,columnspan=10,padx=5)
 
 
