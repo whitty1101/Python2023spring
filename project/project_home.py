@@ -5,10 +5,10 @@ from pathlib import Path
 import smtplib
 from tkinter import *
 import tkinter.ttk as ttk
+from tkinter import messagebox
 from tkscrolledframe import ScrolledFrame
 from tkinter import filedialog
 from PIL import Image, ImageTk
-from tkinter import messagebox
 from tkinter import Text
 import random
 
@@ -176,7 +176,9 @@ def email(emailEntryBox):
             print('Error message:',e)
             messagebox.showwarning('showwarning','Email does not exist')
 def closerank(event):
-    rank.destroy()
+    rankyesno=messagebox.askyesno('destroy','are you sure to destroy window rank?')
+    if rankyesno==True:
+        rank.destroy()
 def RankWin():
     rank=Toplevel(home)
     rank.geometry('1920x1080')
@@ -232,7 +234,10 @@ def showstockdetail():
     ratestar=Label(showstockdetailwin,image=tk_img1,width=300,height=240)
     ratestar.grid(row=6,column=0,sticky=W+E)
 def closetab(event):
-    home.destroy()
+    homeyesno=messagebox.askyesno('destroy','are you sure to destroy window home?')
+    if homeyesno==True:
+        home.destroy()
+
 
 
 
